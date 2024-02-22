@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html leng="en">
+    <head>
+        <title>Gli Eventi</title>
+        <style>
+            input{
+                display: block;
+                margin-bottom: 20px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <form>
+            <div>
+                <label for="fname">Nome: </label>
+                <input id="fname" type="text" onfocus="saluta()">
+            </div>
+            <div>
+                <label for="lname">Cognome: </label>
+                <input id="lname" type="text">
+            </div>
+            <div>
+                <input id="submit" type="submit">
+            </div>
+        </form>
+        <p></p>
+
+        <script>
+            const form = document.querySelector('form');
+            const nome = document.getElementById('fname');
+            const cognome = document.getElementById('lname');
+            const paragrafo = document.querySelector('p');
+
+            form.onsubmit = function (e) {
+                if (nome.value === '' || cognome.value === ''){
+                    e.preventDefault();
+                    paragrafo.textContent = 'You need to fill in both names!';
+                }
+            }
+
+            nome.onfocus = function(){
+                console.log('sono in focus');
+            }
+
+            nome.onclick = function(){
+                console.log('hai cliccato')
+            }
+
+            function saluta(){
+                console.log('Ciao Luca');
+            }
+
+            nome.addEventListener('focus', function(e){ //e sta per event ma si può chimare in qualunque modo
+                console.log('sono in focus dal listener');
+                // console.log(e.target); //serve per visualizzare il targhet dell'evento
+            })
+
+        </script>
+    </body>
+
+</html>
