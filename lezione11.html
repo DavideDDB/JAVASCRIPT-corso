@@ -23,6 +23,7 @@
 
         </style>
     </head>
+        <!-- UTILIZZO DEL RETURN (necessario per far uscire un elemento da una funzione)-->
     <body>
             <input type="text" name="numero" placeholder="inserisci un numero">
             <button>Calcola cubo!</button>
@@ -37,7 +38,7 @@
             function cubo(number){
                 let result = number*number*number;
                 console.log(result);
-                return result;
+                return result; // qui
             }
         
             button.addEventListener('click', ()=>{

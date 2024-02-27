@@ -35,7 +35,7 @@
 
             form.onsubmit = function (e) {
                 if (nome.value === '' || cognome.value === ''){
-                    e.preventDefault();
+                    e.preventDefault(); //questo serve per prevenire il default (ovvero il submot del form)
                     paragrafo.textContent = 'You need to fill in both names!';
                 }
             }

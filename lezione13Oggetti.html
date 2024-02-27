@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html leng="en">
+    <head>
+        <title>Oggetti</title>
+        <style>
+            input{
+                display: block;
+                margin-bottom: 20px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <script>
+            const chiave = 'genere';
+
+            const persona = {
+                nome: 'Luca',
+                cognome: 'Rossi',
+                genere: 'Maschio',
+                età: 25,
+                interessi: ['snowboard', 'basket', 'pic-nic al parco'],
+                indirizzo: {
+                    via: 'Piazza Roma',
+                    cap: '09872',
+                    provincia: 'MI',
+                    città: 'Milano'
+                },
+                saluta: function() {
+                    console.log(`Ciao sono ${persona.nome}`)
+                }
+
+            }
+            console.log(persona.nome); //mandare a schermo i dati delloggetto
+            persona.saluta(); //utilizo il metodo dell'oggetto
+
+            console.log(persona['nome']); //BRACKET NOTATION
+            persona.nome; // è uguale scrivere come sopra sono solo due modi differenti di scrivere una cosa
+            
+            console.log(persona['interessi'][2]);
+            persona.interessi[2]; // "" 
+
+            console.log(persona['indirizzo']['cap']);
+
+            //le funzioni si chiamano sempre nello stesso modo ovvero solo con la DOT NOTATION 
+        
+            console.log(persona[chiave]); // cerca all'interno di persona l'elemento connesso alla const chiave (ovvero genere)
+            console.log(persona.chiave); // non funziona perche cerca all'interno della persona CHIAVE ma non la trova
+
+            persona.nome = 'Paolo'; //per modificare gli elementi (prprietà) di un oggetto
+
+            persona.colorePreferito = 'giallo';
+            console.log(persona);
+        </script>
+    </body>
+</html>
