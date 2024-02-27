@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Classi ed Ereditarietà</title>
+        
+        <style>
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <script>
+            //Creare un oggetto
+
+            //  function Persona(nome, cognome, eta, genere, interessi) {
+            //      this.nome = nome;
+            //      this.cognome = cognome;
+            //      this.eta = eta;
+            //      this.genere = genere;
+            //      this.interessi = interessi;
+            //      this.saluta = function(){
+            //          console.log(`Ciao sono ${this.nome}`);
+            //      };
+            //  };
+
+            // function Insegnante(nome, cognome, eta, genere, interessi, materia) {
+            //     Persona.call(this, nome, cognome, genere, interessi);
+
+            //     this.materia = materia;
+            //     this.saluta = function() {
+            //         console.log(`Buongiuorno sono ${this.nome} ${this.cognome}`);
+            //     };
+            // };
+
+
+            //creare una classe
+            class Persona {
+                constructor(nome, cognome, eta, genere, interessi) {
+                    this.nome = nome;
+                    this.cognome = cognome;
+                    this.eta = eta;
+                    this.genere = genere;
+                    this.interessi = interessi;
+                }
+                saluta(){
+                    console.log(`Ciao sono ${this.nome}`);
+                };
+            }
+            class Insegnante extends Persona {
+                constructor(nome, cognome, eta, genere, interessi, materia) {
+                    super(nome, cognome, eta, genere, interessi);
+
+                    this.materia = materia;
+                }
+                //get e set  (per modificare una proprietà)   
+                get materia() {
+                    return this._materia;
+                }
+    
+                set materia(nuovaMateria) {
+                    this._materia = nuovaMateria;
+                }
+
+                riprendiAlunno(nomeAlunno) {
+                    console.log(`${nomeAlunno} non si mangia in classe!`);
+                }
+            }
+
+            const insegnante = new Insegnante('Anna', 'Blu', 32, 'Femmina', ['Netflix'], 'Storia');
+            insegnante.riprendiAlunno('Edoardo');
+            //modifica di una proprietà
+            insegnante.materia = 'Matematica';
+            
+           
+            // console.log(insegnante);
+            // insegnante.saluta();
+        </script>
+
+    </body>
+</html> 

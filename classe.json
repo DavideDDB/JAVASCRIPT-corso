@@ -1,0 +1,36 @@
+{
+    "nome": "4A",
+    "numeroAlunni": 21,
+    "scuolaSabato": false,
+    "scuola": "Scuola elementare Miao",
+    "insegnanti": [
+        {
+            "nome": "Anna",
+            "cognome": "Blu",
+            "materieInsegnate": ["Storia", "Italiano", "Geografia"]
+        },
+        {
+            "nome": "Ludovica",
+            "cognome": "Rossi",
+            "materieInsegnate": ["Matematica", "Geometria"]
+        }
+    ],
+    "anulli": [
+        {
+            "nome": "Marco",
+            "cognome":"Qwerty"
+        },
+        {
+            "nome": "Leonardo",
+            "cognome":"Verdi"
+        },
+        {
+            "nome": "Maria",
+            "cognome":"Gialli"
+        }
+    ],
+    "orari": {
+        "mattina": ["Storia", "Matematica"],
+        "pomeriggio": ["Italiano", "Geografia"]
+    }
+}

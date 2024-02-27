@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html leng="en">
+    <head>
+        <title>Programmazione ad oggetti</title>
+
+        <style>
+
+        </style>
+
+    </head>
+    <body>
+
+        <script>
+            function Persona(nome, cognome, eta, genere, interessi) { //costruttore
+                this.nome = nome;
+                this.cognome = cognome;
+                this.eta = eta;
+                this.genere = genere;
+                this.interessi = interessi;
+                this.bio = function(){ //creazione di un metodo, la biografia in questo caso
+                    console.log(`${this.nome} ${this.cognome} è 
+                    ${(this.genere == 'Maschio') ? 'un ragazzo':'una ragazza'} di ${this.eta} anni 
+                    a cui piace ${this.interessi.join(', ')}`);
+                };
+                this.saluta = function(){
+                    console.log(`Ciao sono ${this.nome}`);
+                }
+
+                
+            }
+            
+            const persona1 = new Persona('Luca', 'Rossi', 23, 'Maschio', ['calcio', 'basket']);
+            const persona2 = new Persona('Anna', 'Verdi', 19, 'Ragazza', ['lettratura','cinema', 'musica']);
+
+            persona1.saluta();
+            persona2.saluta();
+
+            persona1.bio();
+            persona2.bio();
+
+        </script>
+    </body>
+</html>
