@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html leng="en">
+    <head>
+        <title>18 Pratica Async</title>
+    <style>
+
+    </style>
+    
+    </head>
+    <body>
+
+        <button>Via</button>
+
+        <script>
+            
+            //let response = fetch('https://ak.picdn.net/shutterstock/videos/11773709/thumb/10.jpg');
+            //let blob = response.blob();
+
+            ////////////////////////////////////////////////////
+
+            //  function loadAsset(url, type, callback) {
+            //      let xhr = new XMLHttpRequest();
+            //      xhr.open('GET', url);
+            //      xhr.responseType = type;
+  
+            //      xhr.onload = function() {
+            //          callback(xhr.response);
+            //      };
+  
+            //      xhr.send();
+            //  }
+  
+            //  function displayImage(blob) {
+            //      let objectURL = URL.createObjectURL(blob);
+  
+            //      let image = document.createElement('img');
+            //      image.src = objectURL;
+            //      document.body.appendChild(image);
+            //  }
+  
+            //  loadAsset('https://ak.picdn.net/shutterstock/videos/11773709/thumb/10.jpg', 'blob', displayImage);
+            
+            /////////////////////////////////////////////////////////
+            
+            //(metodo "moderno")
+            fetch('classe.json').then(function (response){
+                return response.json();
+            }).then(function (json) {
+                classe = json;
+                // inizialized(); //esempio di errore
+                console.log('Dati: ', classe)
+            }).catch(function (err) {
+                console.log('Fetch problem: ' + err.message);
+            });
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<http>
+    <head>
+        <title>17 Async</title>
+        
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <button id="date">Vai</button>
+        <button id="alert">Alert</button>
+
+        <script>
+            const btn = document.querySelector('#date');
+            const btnAlert = document.querySelector('#alert');
+            btn.addEventListener('click', ()=> {
+                let myDate;
+                for (let i=0; i< 10000000; i++) {
+                    let date = new Date();
+                    myDate = date
+                }
+
+                console.log(myDate);
+
+                let pElem = document.createElement('p');
+                pElem.textContent = 'This is a newly-added paragraph.';
+                document.body.appendChild(pElem);
+            });
+
+            btnAlert.addEventListener('click', () =>{
+                alert('Eccomi');
+            });
+
+        </script>
+    </body>
+</http>
