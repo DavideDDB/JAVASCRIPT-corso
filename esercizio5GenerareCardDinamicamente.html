@@ -1,0 +1,105 @@
+<!--ESERCIZIO MIRATO A CAPIRE COME CREARE ELEMENTI DINAMICAMENTE
+OVVERO AL RUN DEL CODICE LA FUNZIONE CREA DLI ELEMENTI, da controllare
+per capire come "appendere" gli elementi l'uno all'altro, lato css da ingorare
+essendo in uso tailwind (framework css)-->
+<!DOCTYPE html>
+
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Esercizio #5</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    
+    <div id="container" class="flex flex-wrap md:w-1/2 m-10">
+      <!-- Inizio card esempio -->
+      <!--
+        <div class="w-full md:w-1/2 xl:w-1/3 px-4">
+        <div class="bg-white rounded-lg overflow-hidden mb-10 shadow-xl">
+          <img
+            src="https://img.freepik.com/free-vector/night-ocean-landscape-full-moon-stars-shine_107791-7397.jpg?w=2000"
+            alt="image"
+            class="w-full" />
+          <div class="p-8 sm:p-9 md:p-7 xl:p-9 text-center">
+            <h3 class="font-semibold text-dark text-xl">Titolo di prova</h3>
+            <p class="text-base text-body-color leading-relaxed mb-7">
+              Lorem ipsum dolor sit amet pretium consectetur adipiscing elit.
+              Lorem consectetur adipiscing elit.
+            </p>
+          </div>
+        </div>
+      </div>
+    -->
+      <!-- Fine card esempio -->
+
+
+      <script>
+        const arr = [
+            {
+                url: "https://images.unsplash.com/photo-1710415273379-741f889cbf65?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                titolo: "Una card bellissima",
+                descrizione: "Lorem ipsum dolor sit amet consectetur "
+            },
+            {
+                url: "https://images.unsplash.com/photo-1503751192943-5537c30ba181?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                titolo: "Card 2",
+                descrizione: "Lorem ipsum dolor sit amet consectetur "
+            },
+            {
+                url: "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                titolo: "Card 3",
+                descrizione: "Lorem ipsum dolor sit amet consectetur adipiscing elit."
+            }
+        ]
+
+        arr.forEach((data) =>{ //data fa riferimento a ogni singolo oggetto dell'array
+            creaCard(data)
+        });
+
+        function creaCard(valore){
+            const card = document.createElement("div");
+            card.className = "w-full md:w-1/2 xl:w-1/3 px-4";
+
+            const innerDiv = document.createElement("div");
+            innerDiv.className = "bg-white rounded-lg overflow-hidden mb-10 shadow-xl"
+            card.appendChild(innerDiv); //appendiamo alla prima carta l'innerDiv
+
+            const immagine = document.createElement("img");
+            immagine.src = valore.url;
+            immagine.className = "w-full";
+            innerDiv.appendChild(immagine);
+
+            const textContainer = document.createElement("div");
+            textContainer.className = "p-8 sm:p-9 md:p-7 xl:p-9 text-center";
+            innerDiv.appendChild(textContainer);
+
+            const titolo = document.createElement("h3");
+            titolo.className = "font-semibold text-dark text-xl";
+            titolo.appendChild(document.createTextNode(valore.titolo))
+            textContainer.appendChild(titolo);
+            
+            const descrizione = document.createElement("p");
+            descrizione.className = "text-base text-body-color leading-relaxed mb-7";
+            descrizione.appendChild(document.createTextNode(valore.descrizione))
+            textContainer.appendChild(descrizione);
+
+
+            document.getElementById("container").appendChild(card);
+
+            /*Abbiamo creato una matiosca di elementi che così abbiamo composto:
+            - 1. creo la card con "const card" e gli assegno le classi con className
+            - 2. creo l'innerDiv, gli assegno le classi e lo butto nella card con "card.appendChild(innerDiv)"
+            - 3. creo l'immagine e il container che sono entrambi dentro l'innerDiv , gli associo la classe e li butto nell'innerDiv con "innerDiv.appendChild(...)"
+            - 4. poi nel textContainer ho il titolo e la descrizione, lo creo con const ... gli assegno le classi, gli metto dento le textNode e li appendo al textContainer
+            - 5. infine butto la card nel container o body (in questo caso nel ocntainer)
+            */
+        }
+      </script>
+    </div>
+  </body>
+</html>

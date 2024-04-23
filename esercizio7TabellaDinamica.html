@@ -1,0 +1,145 @@
+<!--PUNTI IMPORTANTI ESERCIZIO-->
+<!--
+    - creare tabella che cambia numero colonne e contenuto righe a seconda dell'input
+    - lavorare con dei dati da mettere in tabella che non sono solo stringhe ma anche oggetti (array di oggetti: vedere parte funzione generaReighe) 
+-->
+<!DOCTYPE html>
+
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>7 Creare tabelle dinamicamente</title>
+    
+  </head>
+  <body>
+
+    <!--CREO BOZZA TABELLA(molto importante per chiarezza mentale di cosa devo andare a produrre dinamicamente)-->
+    <!--
+        <table>
+            <thead>                 //INTESTAZIONE TABELLA
+                <th>ID</th>         //CELLA INTESATIONE COLONNA
+                <th>NOME</th>   
+                <th>...</th>
+            </thead>
+            <tbody>                 //CORPO TABELLA
+                <tr>                //RIGA TABELLA
+                  <td>1</td>        //CELLA DELLA COLONNA NELLA RIGA
+                  <td>Luca</td>  
+                  <td>...</td>  
+                </tr>
+            </tbody>
+        </table>
+    -->
+    <script>
+
+        //ogni tabella in fase di creaizone deve ricevere 2 parametri
+        // un array con i nomi delle colonne ed un array di oggetti
+        //che rappresenta i dati delle righe
+
+        /*Creo stampino per le tabelle*/
+        class Tabella{
+            nomiColonne;
+            data;
+
+            //creiamo il costruttore, gli mettiamo una funzione che qunado usa il costruttore genera anche in automatico la tabella
+            constructor(nomiColonne,data){
+                this.nomiColonne = nomiColonne
+                this.data = data
+                this.generaTabella()
+
+            }
+
+            generaTabella(){ //essa è composta da generaColonne e generaRighe
+                //generaColonne
+                //generaRighe //con questo schemino capisco che funzioni devo creare per generare la tabella effetiva
+                //generaFooter
+                //la tabella è qualcosa a schermo, quindi sappiamo che bisogna reare una "giglia"
+                const tabella = document.createElement("table")
+                tabella.appendChild(this.generaColonne())//adesso bisogna andare ad appendere alla tabella le colonne generate, il che significa che la funzione generaColonne ci farà un return di tuttle le colonne
+                tabella.appendChild(this.generaRighe())
+                document.querySelector("body").appendChild(tabella)//vogliamo poi appenderla da qualche parte questa tabella che creiamo, stiamo dicendo "selezional'elemento body dellHTML e appendici la tabella"
+                /*
+                1 - creo una costante tabella che mi crea l'elemento tag tabella
+                2 - appendo alla tabella il generatore di colonne (genero quindi le colonne)
+                3 - appendo alla tabella il generatore di righe (genererò quindi le righe)
+                4 - una volta che tutto è creato, appendo la tabella al body
+                */
+            }
+
+            generaColonne(){
+                //return tutteLeColonne
+                const thead = document.createElement("thead") //crea intestazione
+                this.nomiColonne.forEach(nomeColonna => {     //per ogni nome della colonna genero il th
+                    const th = document.createElement("th")     //crea i th nel documento (tabella)
+                    const text = document.createTextNode(nomeColonna) //inserisce il testo dentro il th appena creato, e dentro gli passeremo il nomeColonna che è il contenuto dell'array nomiColonne1 
+                    th.appendChild(text) //appendo il testo appena creato dentro il th
+                    thead.appendChild(th) //appendo il th al thead
+                });
+                return thead //dopo aver appeso testo-a-th, th-a-thead, ritorniamo il thead (che contiene il tutto) in modo che sarà utilizzato quando verrà richiamata questa funzine (nella reazione delle colonne della tabella)
+            }
+
+            generaRighe(){
+                const tbody = document.createElement("tbody");
+                this.data.forEach(dato=>{
+                    const tr = document.createElement("tr");
+                    Object.keys(dato).forEach(valore=>{  //ATTENZIONE essendo un array di OGGETTI e non di valori normale, devo fare così, non come prima(per le colonne)
+                        const td = document.createElement("td");
+                        const text = document.createTextNode(dato[valore]);
+                        td.appendChild(text)  //td=cella
+                        tr.appendChild(td)    //tr=riga
+                    })
+                    tbody.appendChild(tr)
+                })
+                return tbody
+            }
+        }
+
+        const nomiColonne1 = ['id', 'nome','cognome','email','codice fiscale','indirizzo']
+        const data1 = [
+            {
+                id: 1,          //chiave(dato) : valore(valore)
+                nome: 'Luca',
+                cognome: 'Rossi',
+                email: 'luca.rossi@gmail.it',
+                codiceFiscale: 'SKKSCS85R03F777K',
+                indirizzo: 'Via Torino'
+            }
+        ]
+
+        const tabella1 = new Tabella(nomiColonne1, data1)
+////////////////////////////////////////////////////////////
+        const nomiColonne2 = ['ID', 'TITOLO', 'GIOCATORI', 'DURATA', 'COMPLESSITA']
+        
+        const data2 = [
+            {
+                id: 1,
+                titolo: 'Circadians',
+                giocatori: '2-5',
+                durata: '120-240 min',
+                complessità: '3.87'
+            },
+            {
+                id: 2,
+                titolo: 'Rats Of Wistar',
+                giocatori: '2-4',
+                durata: '60-120 min',
+                complessità: '3.28'
+            },
+            {
+                id: 3,
+                titolo: 'On Mars',
+                giocatori: '1-4',
+                durata: '80-150 min',
+                complessità: '4.67'
+            }
+
+        ]
+
+        const tabella2 = new Tabella(nomiColonne2, data2)
+    </script>
+  </body>
+</html>
+

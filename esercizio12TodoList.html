@@ -1,0 +1,141 @@
+<!--PUNTI IMPORTANTI ESERCIZIO-->
+<!--
+- Utilizzare localStore (vedere su mozzilla)
+- Lavorare con gli oggetti
+-->
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>12 Esercizio sulla creazione di una TODOLIST</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-yellow-200 flex flex-col justify-center items-center h-screen">
+        
+        <h1 class="text-3xl font-bold text-brown-800 mb-4">TODO LIST </h1>
+        
+        <div class="flex items-center mb-4">
+            <input id="new-task" type="text" class="p-2 rounded-l-lg border border-gray-400 focus:outline-none focus:ring focus:border-yellow-500" placeholder="Cosa facciamo?">
+            <button id="new-task-btn" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 ml-2">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="w-6 h-6">
+                        <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"
+                        d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                </svg>       
+            </button>
+        
+            <button id="clear" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-r-lg ml-2">
+                <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                class="w-6 h-6">
+                    <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                </svg>
+            </button>
+        </div>
+        
+        <div id="todo" class="flex items-center justify-center flex-col"></div>
+
+        <script>
+
+            class TODOlist{
+                
+                constructor(){
+                    this.tasks = this.caricaTask();
+                    this.generaTask()
+                    console.log("tasks", this.tasks);
+                }
+
+                aggiungiTask(task){
+                    this.tasks.push(task)
+                    console.log("tasks", this.tasks);
+                    this.generaNuovoTask(task)
+                    localStorage.setItem("tasks", JSON.stringify(this.tasks));//salvare nel local storage, JSON stringify serve a far si che quando creiamo un impegno, lo inserisca nel local sotrage come elemento dell'array e non come stringa generica
+                }
+            
+                completaTask(task){
+                    console.log(`${task} completato!`)
+                    console.log(this.tasks);
+                    const index = this.tasks.indexOf(task)
+                    this.tasks.splice(index, 1)
+                    localStorage.setItem("tasks", JSON.stringify(this.tasks));
+                }
+
+                generaNuovoTask(task){
+                    const todo = document.getElementById("todo");
+                    const p = document.createElement("p");
+                    p.classList.add("p-2", "rounded-lg", "bg-white", "flex-grow", "mb-2");
+                    p.appendChild(document.createTextNode(task));
+                    todo.appendChild(p);
+                    p.addEventListener("click", (e)=>{
+                        this.completaTask(task);
+                       e.srcElement.remove();
+                    });
+                }
+
+                generaTask(){
+                    this.tasks.forEach((task) => {
+                        const todo = document.getElementById("todo");
+                        const p = document.createElement("p");
+                        p.classList.add("p-2", "rounded-lg", "bg-white", "flex-grow", "mb-2");
+                        p.appendChild(document.createTextNode(task));
+                        todo.appendChild(p);
+                        p.addEventListener("click", (e)=>{
+                            this.completaTask(task);
+                            e.srcElement.remove();
+                        });
+                    });
+                }
+
+                caricaTask(){
+                    const tasks = JSON.parse(localStorage.getItem("tasks")) ?? [] //JSON.parse serve per tradurre i dati da formato stringa stringa e vengono confertiti in formato javasctipt (è il contrario di JSON sringify) ?? [] significa che se trova null perche non ci sono elementi, non ritorni null ma un array vuoto ([])
+                    return tasks
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", ()=>{ //per aspettare che prima di tutti abbia caricato tutto il DOM
+                const newTaskBtn = document.getElementById("new-task-btn")
+                const clearBtn = document.getElementById("clear")
+                const input = document.getElementById("new-task")
+                
+                const todoList = new TODOlist();
+
+                newTaskBtn.addEventListener("click", ()=>{
+                    todoList.aggiungiTask(input.value);
+                    input.value = "";
+                })
+
+                clearBtn.addEventListener("click", ()=>{
+                    console.log("pulisci task")
+                    input.value="";
+                })
+
+                input.addEventListener("keypress", (e)=>{ //keypress significa quando viene premuta la tasitera
+                    if(e.key === "Enter"){
+                        todoList.aggiungiTask(input.value)
+                        input.value = ""
+                    }
+                })
+
+            })
+        </script>
+
+    </body>
+</html>

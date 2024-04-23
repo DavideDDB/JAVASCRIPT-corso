@@ -1,0 +1,107 @@
+<!--PUNTI IMPORTANTI ESERCIZIO-->
+<!--
+    - Ciclare gli oggetti come array con "Object.keys"
+    - creare una tabella
+-->
+<!DOCTYPE html>
+
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>6 Popolare Tabelle dinamicamente</title>
+    
+  </head>
+  <body>
+
+    <!--Creazione tabella-->
+    <table id="tabella">
+        <thead>
+            <th>ID</th>
+            <th>nome</th>
+            <th>cognome</th>
+            <th>email</th>
+            <th>codice fiscale</th>
+            <th>indirizzo</th>
+        </thead>
+    </table>
+
+    <script>
+        console.log("metto intestazione")
+        /*Creazione Array per tabella*/
+        const data = [
+            {
+                id: 1,                              /**/
+                nome: "Luca",                       /**/
+                cognome: "rossi",                   /**/ //questa è una riga
+                email: "luca.rossi@gmail.com",      /**/
+                codiceFiscale: "SKKSCS85R03F777K",  /**/
+                indirizzo: "via torino"             /**/
+            },
+            {
+                id: 2,
+                nome: "marco",
+                cognome: "verdi",
+                email: "marco.verdi@gmail.com",
+                codiceFiscale: "SKKSCS85R03F666K",
+                indirizzo: "via milano"
+            },
+            {
+                id: 3,
+                nome: "anna",
+                cognome: "blu",
+                email: "anna.blu@gmail.com",
+                codiceFiscale: "SKKSCS85R03F555K",
+                indirizzo: "via venezia"
+            }
+        ];
+
+        /*Creazione loop per popolamento tabella*/
+        /*
+        per ogni elemento di data bisogna inserire una riga
+        ,iniziamo col creare una costante "table" perche poi andremo ad appenderci le componenti
+        */
+
+        const table = document.getElementById("tabella")
+        
+        /*AGGIUNGO | DAVANTI A OGNI TESTO DEL TH DELLA TABELLA*/
+        /*
+        const headers = document.querySelectorAll("#tabella th");
+            headers.forEach(header => {
+            const text = document.createTextNode("|" + header.textContent);
+            header.textContent = ""; // Rimuovi il testo esistente nell'intestazione
+            header.appendChild(text); // Aggiungi il testo con "O" davanti
+        });
+        */
+
+        data.forEach((element) => {/*per ogni elemento di data bisogna creare una riga*/
+            const row = document.createElement("tr")//creo struttura riga
+            console.log("ho creato una riga");
+            //per ogni proprietà(key)(es. email) di data(element), creo una colonna, lo facciamo con un altro forEach
+            Object.keys(element).forEach(key => {
+
+                /*
+                Inizialmente da errore perche il FOREACH 
+                LAVORA CON ARRAY NON CON GLI OGGETTI, 
+                e noi abbiamo un array di oggetti, per farlo
+                utilizziamo la proprietà "Object", esso prende 
+                data e le sue proprieta come se fossero delle chiavi
+                (email ecc...) con dei valori associati (luca.rossi@gm...) 
+                */
+
+                //console.log(element[key])  //è come dire data[id,email...]  
+                const column = document.createElement("td")
+                const text = document.createTextNode("|" + element[key])//creo del testo, perche dentro il th e td va del testo, "|" divisorio 
+                column.appendChild(text)//appendo il testo alla colonna
+                row.appendChild(column)//tutte le colonne vanno appese alle righe
+                console.log("ho creato una colonna");
+            });
+
+            table.appendChild(row)//abbiamo appeso tutto alla riga ma dobbiamo appendere anche la riga alla tabella (o body)
+        });
+    </script>
+
+  </body>
+</html>

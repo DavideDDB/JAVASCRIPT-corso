@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lrng="en">
+    <head>
+        <title>20 Async e Await</title>
+
+    </head>
+    <body>
+        <script>
+            //async
+            //
+            // async function hello(){
+            //     return 'hello';
+            // }
+            // 
+            // hello().then((value) =>{
+            //     console.log(value);
+            // });
+
+
+            //si può scrivere come espressione
+            // let prova = async function(){}
+            
+            //oppure
+            // let prova1 = async ()=> {return'hello'};
+
+            
+
+            //await
+            //
+            // async function hello1(){
+            //     return greeting = await Promise.resolve('hello');
+            // }
+            // 
+            // hello().then((value)=> {
+            //     console.log(value);
+            // });
+
+
+            //esempio di async e await
+            //
+            // fetch('coffee.jpg')
+            // .then(response =>{ //controlla che il "caricamento" dell'immagine non dia errore
+            //     if (!response.ok) {
+            //         throw new Error(`HTTP error! status: ${response.status}`);
+            //     }else{
+            //         return response.blob();
+            //     }
+            // })
+            // .then(myBlob => {
+            //     let objectURL =URL.createObjectURL(myBlob);
+            //     let image = document.createElement('img');
+            //     image.src = objectURL;
+            //     document.body.appendChild(image);
+            // })
+            // .catch(e => {
+            //     console.log('There has been a problem with your fetch operation: ' + e.message);
+            // });
+            
+            //come funziona
+            //
+            // async function myFetch() {
+            //     let response = await fetch('coffee.jpg');
+            //     let myBlob = await response.blob();
+            // 
+            //     let objectURL = URL.createObjectURL(myBlob);
+            //     let image = document.createElement('img');
+            //     image.src = objectURL;
+            //     document.body.appendChild(image);
+            // }
+            // 
+            // myFetch().catch(e =>{
+            //     console.log('There has been a problem with your fetch operation: ' + e.message);
+            // });
+
+            //gestire gli errori
+            //
+            async function myFetch() {
+                try{
+                let response = await fetch('coffee.jpg');
+                let myBlob = await response.blob();
+            
+                let objectURL = URL.createObjectURL(myBlob);
+                let image = document.createElement('img');
+                image.src = objectURL;
+                document.body.appendChild(image);
+                } catch (e){
+                    console.log('There has been a problem with your fetch operation: '+ e.message);
+                }
+            }
+            
+            myFetch()
+
+
+        </script>
+    </body>
+</html>

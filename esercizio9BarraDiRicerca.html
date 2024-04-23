@@ -1,0 +1,93 @@
+<!--PUNTI IMPORTANTI ESERCIZIO-->
+<!--
+    - creare una tendina con elementi di un array
+    - selezionare dalla tendina con immissione nella zonda di input
+    - mantenere in ascolo un Listener (+-)
+    - concetto di RegExp 
+        (rappresenta un modello di ricerca e manipolazione di testo
+         basato su un certo pattern, definiscono un pattern di ricerca 
+         all'interno di una stringa. Possono essere utilizzate per effettuare 
+         operazioni come ricerca di testo, sostituzione di testo, estrazione di 
+         informazioni da stringhe complesse. In questo esercizio il pattern
+         è definito così: RegExp(`^${valore}`, 'i')  )
+-->
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>9 Esercizio barra di ricerca con autocompilazone</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+    <head>
+    <body>
+        <section class="m-5 p-5">
+            <input type="text" class="border-2 p-2" placeholder="Chi stai cercando?" id="ricerca" autocomplete="off">
+            <div id="risultati" class="border-2 p-2"></div>
+
+        </section>
+    
+        <script>
+            //collego l'inerimento testo all'ID della zona di input
+            const input = document.getElementById("ricerca")
+            input.addEventListener("keyup", autocomplete)//dobbiamo fare in modo che l'Evento di avvio sia ogni volta in cui scrivo nella ricerca, e dovrà eseguire la funzione "autocpmplete"
+            const risultati = document.getElementById("risultati")
+            
+            /*
+            - keyup è quando premo e tiro su il pulsante
+            - keydown e quando premo
+            - autocomplete la mettiamo senza dopo le parentesi () altrimemti
+                significherebbe di eseguirla subito e non quando
+                avviene effetivamente l'evento 
+            
+            */
+            const nomi = [
+                "andrea",
+                "anna",
+                "marco",
+                "luca",
+                "giovanni",
+                "chiara",
+                "clara",
+            ]; 
+
+            function autocomplete(event){
+            
+                //creare l'Html come stringa per poi immetterlo nella pagina
+                let nomiConsigliati =""
+                const nomi = autocompleteMatch(event.target.value)
+                nomi.forEach(nome => {
+                    nomiConsigliati += `<li class="hover:bg-gray-200" onclick="seleziona(event)">${nome}</li>` //questo mi permette di creare l'estetica di selezione del suggerimento
+                });
+                //immeto la struttura <li> su un'altra struttura <lu>
+                risultati.innerHTML = `<ul>${nomiConsigliati}</ul>`
+            }
+
+            function seleziona(event){
+                risultati.innerHTML = ""
+                //assegno il contenuto testuale dell'elemento che ha scatenato l'evento
+                // quindi il valore di input (input.value) diventa uguale (=) al testo presente all'interno (textContent) dell'elemento che ha scatenato l'evnto (event.target)
+                input.value = event.target.textContent
+            }
+
+            //creiamo una funzione che abbini il consigli di ricerca al valore dell'array effetivo
+            function autocompleteMatch(valore) {
+                if(valore == "") return[]
+
+                    //le RegExp sono stringhe che ci ocnsentono di mettere insieme dei pattern "es. voglio tutte quelle stringhe che hanno come secondo carattere una R"
+                    const reg = new RegExp(/*valore*/`^${valore}`, 'i') // 'i' indica la modalità non case-sensitive, '^' su un espressione regolare (regexp) indica che la corrispondenza deve avvenire all'inizio del nome del filtro della ricerca
+
+                    //filtriamo l'array
+                    return nomi.filter(nome => {
+                        //il nome va verificato, deve esserci il match, in tutta la lista di nomi se c'è il match tra ogni singolo nome e la reg che abbiamo fatto, mi ritorni il nome 
+                        if (nome.match(reg)) return nome
+                    })
+                }
+                
+            
+        </script>
+    </body>
+</html>

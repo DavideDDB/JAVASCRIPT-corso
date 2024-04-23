@@ -1,0 +1,92 @@
+<!--PUNTI IMPORTANTI ESERCIZIO-->
+<!--
+    - Gestione degli elementi di un array (togliere e immettere)
+    - Muovere gli elementi all'interno di un array
+-->
+<!DOCTYPE html>
+
+<html lang="it">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>8 Meccanica mazzo di carte</title>
+        <!--
+            - pescare
+            - mischiare
+            - rimettere la carta nel fondo
+        -->
+    </head>
+
+    <body>
+        <!--PUNTI CREAZIONE-->
+        <!--
+            1 - come nell'esercizio precedente creo lo stampino (class) del mazzo
+            2 - creo un nuovo mazzo con const deck = new Deck()
+        -->
+        <script>
+
+            class Deck{
+                carte;
+
+                constructor (carte){
+                    this.carte = carte;
+                    console.log("genero nuovo mazzo", carte)
+                
+                }
+
+                mischia (){
+                    this.carte.sort((a,b)=>{ //sort serve per mischiare l'array in base a condizioni che gli diamo
+                           //console.log(a);      //prende gli elementi dell'array a due a due (2,1  3,2  4,3) e con 0.5 Math.random() sceglierà se mischiarli (1,2 oppure 2,1) o meno in modo random    
+                           //console.log(b);
+                        return 0.5 - Math.random() //math.random va da 0 a 1
+                        //Adesso gli diciamo "se da Math.random viene fuori un numero negativo allora 'a' va prima di 'b' altrimenti se è positibo 'b' va prima di 'a', infine se il numero è pari a zero, resta invariato "
+                    });
+                    console.log("mazzo mischiato", this.carte)  
+                
+                }
+                
+                pesca(){ //pesca significa prendere l'ultima carta del mazzo (perche coperto quindi sottosopra)
+                    const cartaPescata = this.carte.pop()
+                    console.log(cartaPescata);
+                    console.log("mazzo dopo la pensacat", this.carte)
+                    /*
+                    il che significa che quando si pensca, si toglie l'ultimo elemento del fondo dell'array
+                    questo lo facciamo tramite la funzione pop() che prende l'ultimo elemento di un array
+                    infatti il log ci mostrerà l'array senza un elemento per ogni volta che chiamiamo la funzione pesca()
+                    (la funzione shift() toglie il primo elemento dell'array)
+                    */
+                    //Ora bisogna conoscere la carta tolta dall'array
+                    /*
+                    per fare questo dobbiamo creare una costante che sia l'elemento tolto dall'array
+                    ovvero const cartaPescata = this.carta.pop()
+                    */
+                   return cartaPescata
+                }
+                mettiSotto(cartaPescata){ //significa mettere la carta pescata all'inizio del mazzo (array)(perche il mazzo è a faccia in giù)
+                    this.carte.unshift(cartaPescata)
+                    console.log("mazzo dopo mettiSotto", this.carte);
+                    /*
+                    per fare questo possiamo usare push() o unshift() il secondo prende l'ultimo
+                    elemento dell'array e lo mette in cima all'array, il primo fa il contrario, quindi useremo
+                    l'ultimo perche noi abbiamo deciso di percare l'ultimo elemento 
+                    */
+                }
+            }
+
+            
+            const carte1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "fante", "donna", "re" ]
+            const deck1 = new Deck(carte1)
+            deck1.mischia()
+            //console.log(deck1.carte[0])    //prendo la prima carta
+            let cartaPescata = deck1.pesca() //(es.RIMETTI CARTA PESCATA IN FONDO)
+            
+            deck1.mettiSotto(cartaPescata)
+            //deck.pesca()
+            //deck.mettiSotto()
+
+
+        </script>
+    </body>
+</html>

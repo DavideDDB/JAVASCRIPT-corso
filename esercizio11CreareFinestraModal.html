@@ -1,0 +1,69 @@
+<!--PUNTI IMPORTANTI ESERCIZIO-->
+<!--
+    - le finetre modali sono quelle finestre che si aprono tipo allert e ti chiedono 
+    per esempio se vuoi abbandolare la pagina o confermare le modifiche, oppuere una 
+    finestra dove inserisci i dati di registrazione e una volta inseriti si da l'invio 
+    mandando il dato al database  in modo che lo registri per poterlo poi riprendere da li
+    - mettere insieme in modo più dinamico css e javascript
+    - l'utilizzo della classe (di tailwind) hidden (per esempio) e l'uso della proprietà
+    'classList' per accedere alle classi di un elemento e toglierlo o aggiungerlo
+-->
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>11 Esercizio sulla creazione di finestre modal</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+    </head>
+
+    <body class="bg-gray-200 flex flex-col items-center justify-center ">
+        <h1>Creare una modal</h1>
+
+        <button id="open-modal" class="p-3 m-3 bg-blue-300 rounded-md text-white">
+            Apri Modal
+        </button>
+
+        <div id="modal" class="w-[500px] h-[500px] bg-white rounded-xl p-3 hidden">
+            
+            <button id="close-modal" class="float-right">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    fill="none"    
+                    viewBox="0 0 24 24" 
+                    stroke-width="1.5" 
+                    stroke="currentColor" 
+                    class="w-6 h-6"
+                >
+                    <path 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        d="M6 18L18 6M6 6l12 12" 
+                    />
+                </svg>
+            </button>      
+        </div>
+
+        <script>
+            const openModalBtn = document.getElementById("open-modal")
+            const closeModalBtn = document.getElementById("close-modal")
+            const modal = document.getElementById("modal")
+
+            openModalBtn.addEventListener("click", openModal);
+            closeModalBtn.addEventListener("click", closeModal);
+
+            function openModal(){
+                console.log("apro modal");
+                modal.classList.remove("hidden")
+            }
+            function closeModal(){
+                console.log("chiudo modal");
+                modal.classList.add("hidden")
+            }
+        </script>
+    </body>
+</html>

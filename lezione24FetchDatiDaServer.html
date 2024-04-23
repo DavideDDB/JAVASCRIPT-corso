@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta nome="viewport" content="width=device-width, initial-scale=1" >
+        
+        <title>24 Prendere dati dal server con AJAX</title>
+
+        <style>
+        </style>
+
+    </head>
+    <body>
+        <script>
+            let classeXML;
+            let classeFetch;
+
+            //Metodo XML 
+            let url = './classe.json';
+
+            let request = new XMLHttpRequest();
+            request.open('GET', url);
+            request.responseType = 'json';
+
+            request.onload = function () {
+                classeXML = request.response;
+                console.log('XMLHttpRequest: ', classeXML);
+            };
+
+            request.send();
+
+
+            //Metodo Fetch
+            fetch(url)
+            .then(response => response.json())
+            .then(json => {
+                classeFetch = request.response;
+                console.log('fetch: ', classeFetch);
+            });
+
+            // creare un bottone con un eventListener che prendere il fetch e json 
+            // con tre prodotti all'interno immagine, nome prodotto, 
+            // descrizione e prezo
+        </script>
+    </body>
+
+</html>

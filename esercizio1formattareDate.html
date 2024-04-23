@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale">
+        <title>1 Esercizio Formattare Date</title>
+    </head>
+    <body>
+        <script>
+            //1 trovo la data di oggi (perche voglio mandarla a schermo in diversi modi)
+            const oggi = new Date()
+            console.log(oggi)//mando a schermo
+
+            //creiamo un array di oggetti con dentro delle opzioni
+            const options = [
+                {
+                    year: "numeric", //oppure 2-digit per 24 (2024)
+                    month: "2-digit",
+                    day: "2-digit",
+                    weekday: "long", //oppure short per Lun, Mar, Mer...
+                },
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: false //metto true se voglio il PM e AM
+                },
+                {
+                    year: "numeric", //oppure 2-digit per 24 (2024)
+                    month: "2-digit",
+                    day: "2-digit",
+                    weekday: "short",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                },
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    weekday: "long",
+                }
+            ]
+
+            console.log(oggi.toLocaleDateString(undefined, options[options.length-1])); //con questo prendo le date in modo manuale, mentre con il forEach sto gia ciclando
+
+            //mandare le date a schermo dentro degli h2, per ogni set di opzioni manderemo un h2
+            options.forEach(option => { //forEach metodo di array per iterare gli elementi
+                const element= document.createElement("h2") //quindi per ogni elemento dell'array deve creare un elemento CSS h2
+                const dataFormat= oggi.toLocaleDateString(undefined, option)
+                const text = document.createTextNode(dataFormat) //poi bisogna creare del testo da mettere dentro all'h2 altrimenti riuslterà vuoto
+                element.appendChild(text) //appendiamo il nodo text sopra creato all'h2 (che è element)
+                document.querySelector("body").appendChild(element) //appendiamo l'h2 creato al body
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale">
+        
+        <title>4 Differenze tra date</title>
+
+        <style></style>
+    </head>
+    <body>
+        <div>
+            <label for="data1">Data Inizio</label>
+            <input type="date" id="data1">
+        </div>
+        <div>
+            <label for="data2">Data Fine</label>
+            <input type="date" id="data2">
+        </div>
+        
+        <button onclick="calcola()">Cliccami</button>
+        
+        <script>
+            const data1 = document.getElementById("data1")
+            const data2 = document.getElementById("data2")
+
+            function calcola(){
+                const data1milli = new Date(data1.value).getTime()
+                const data2milli = new Date(data2.value).getTime()
+                
+                if(data2milli > data1milli){
+                    const differenza = data2milli - data1milli;
+                    console.log(differenza / (1000 * 60 * 60 * 24));
+                }else{
+                    alert('La data di fine deve essere maggiore di quella di inizio');
+                }
+            }
+        </script>
+    </body>
+</html>

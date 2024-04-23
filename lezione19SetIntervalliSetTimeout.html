@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html leng="en">
+    <head>
+        <title>19 Set intervalli e Set timeout</title>
+        
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <button>Via</button>
+        <p id="demo"></p>
+
+        <script>
+            //SET TIMEOUT
+
+            // questo (chiamando la funzione dentro)
+            //
+            // let prova = setTimeout(function(){
+            //     alert('Ciao sono in Timeout');
+            // }, 5000);
+            
+            // oppure questo (richiamando la funzione fuori)
+            //
+            // let prova = setTimeout(saluta, 5000);
+            // const btn = document.querySelector('button');
+            //
+            // function saluta() {
+            //     alert('Ciao sono in timeout');
+            // }
+            
+            // terminare il countdown
+            //
+            // btn.addEventListener('click', ()=>{
+            //     clearTimeout(prova);
+            // })
+
+
+            const btn = document.querySelector('button');
+            
+            btn.addEventListener('click', ()=>{
+                 clearInterval(createClock);
+             });
+
+
+            function displayTime() {
+                let date = new Date();
+                let time = date.toLocaleTimeString();
+                document.getElementById('demo').textContent = time;
+            }
+
+            const createClock = setInterval(displayTime, 1000);
+
+
+        </script>
+    </body>
+</html>
